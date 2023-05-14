@@ -1,25 +1,30 @@
 <div>
   <label for="txtTodoitem">待辦事項:
     <span>
-      <input id="txtTodoitem" type='text' placeholder="請輸入待辦事項" (keydown.enter)="addItem()" [(ngModel)]="itemDesc">
+      <input id="txtTodoitem" type='text' placeholder="請輸入待辦事項"
+      (keydown.enter)="clearCheckMessage();addItem()"
+      [(ngModel)]="inputDesc">
     </span>
   </label>
-  <button (click)="addItem()">加入</button>
+  <button (click)="clearCheckMessage();addItem()">加入</button>
+  <div *ngIf="checkMessage!==''" [ngClass]="'alertText'">{{checkMessage}}</div>
   <div>
-    <button (click)="clearItem()">清空所有待辦事項</button>
-    <button (click)="readDefaultTodoItem()">載入預設的待辦事項</button>
-  </div>
+    <button (click)="clearItem()">清空所有待辦事項</button><button (click)="readDefaultTodoItem()">載入預設的待辦事項</button><br>
+    <button (click)="setItemState(true)">將所有的待辦事項設定為完成</button><button (click)="setItemState(false)">將所有的待辦事項設定為進行中</button><br>
 
+  </div>
   <table [border]="1">
-    <tr style="background-color: lightgrey;"><td>完成</td><td>待辦事項</td><td>刪除</td></tr>
-    <tr *ngFor="let item of todoitems" [attr.item] = "item">
-      <td><input type="checkbox" [checked]="item.isCompelete" [id]="item.itemDesc"></td>
-      <td><label [htmlFor]="item.itemDesc">{{item.itemDesc}} </label> </td>
-      <!--#item：上課好像有說這個是什麼語法糖，我猜可能可以這樣做，試試-->
-      <td><button #item (click)="removeItem(item)">移除</button></td>
+    <tr style="background-color: lightgrey;"><td>完成</td><td>序號</td><td>待辦事項</td><td>刪除</td></tr>
+    <tr *ngFor="let item of todoitems">
+      <td><input type="checkbox"
+        [id]="item.id"
+        [checked]="item.isCompelete"
+        (change)="updateItemState(item.id,!item.isCompelete)"><!--id是要給label for用的--></td>
+      <td>{{item.id}}</td>
+      <td><label [htmlFor]="item.id">{{item.itemDesc}} </label> </td>
+      <td><button (click)="removeItem(item)">移除</button></td>
     </tr>
   </table>
-  ???異動，沒有更新到arr裡面，有bug，然後加入/移除item，狀態也是有問題。<br>
   已完成：{{getCompeleteItemCount()}}
   進行中：{{getProcessingItemCount()}}
 </div>
