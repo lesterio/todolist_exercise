@@ -5,16 +5,21 @@
     </span>
   </label>
   <button (click)="addItem()">加入</button>
-  <label></label>
+  <div>
+    <button (click)="clearItem()">清空所有待辦事項</button>
+    <button (click)="readDefaultTodoItem()">載入預設的待辦事項</button>
+  </div>
+
   <table [border]="1">
     <tr style="background-color: lightgrey;"><td>完成</td><td>待辦事項</td><td>刪除</td></tr>
-    <tr *ngFor="let item of todoitems">
+    <tr *ngFor="let item of todoitems" [attr.item] = "item">
       <td><input type="checkbox" [checked]="item.isCompelete" [id]="item.itemDesc"></td>
       <td><label [htmlFor]="item.itemDesc">{{item.itemDesc}} </label> </td>
       <!--#item：上課好像有說這個是什麼語法糖，我猜可能可以這樣做，試試-->
       <td><button #item (click)="removeItem(item)">移除</button></td>
     </tr>
   </table>
-  已完成：{{getItemByStatusCount(true)}}
-  進行中：{{getItemByStatusCount(false)}}
+  ???異動，沒有更新到arr裡面，有bug，然後加入/移除item，狀態也是有問題。<br>
+  已完成：{{getCompeleteItemCount()}}
+  進行中：{{getProcessingItemCount()}}
 </div>
