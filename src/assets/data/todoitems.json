@@ -1,0 +1,9 @@
+{
+  "todoitems" : [
+    { "itemDesc" : "睡覺" , "isCompelete" : false},
+    { "itemDesc" : "吃早餐" , "isCompelete" : true},
+    { "itemDesc" : "吃午餐" , "isCompelete" : false},
+    { "itemDesc" : "吃晚餐" , "isCompelete" : false},
+    { "itemDesc" : "吃宵夜" , "isCompelete" : false}
+  ]
+}
