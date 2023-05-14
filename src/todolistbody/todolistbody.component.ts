@@ -28,7 +28,7 @@ export class TodolistbodyComponent {
 
 
   //request = inject(HttpClient) //定義一個請求
-  httpClient = inject(HttpClient);
+  request = inject(HttpClient);
   // ngOnInit(): void {
   //   this.request.get<Todoitem[]>('http://localhost:4200/assets/data/todoitems.json')
   //   .subscribe((data) => { this.todoitems = data })
@@ -39,8 +39,11 @@ export class TodolistbodyComponent {
   clearItem = () => this.todoitems = []
   readDefaultTodoItem(){
     //Todo:用httpGet試試
-    //this.request.get<Todoitem[]>('http://localhost:4200/assets/data/todoitems.json').subscribe(
-    //(data) => { this.todoitems = data })
+    this.request.get<Todoitem[]>('http://localhost:4200/assets/data/todoitems.json').subscribe(
+    (data) => {
+      this.todoitems = data
+      console.log(data)
+    })
   }
   addItem(){
     this.itemDesc !== '' ?
