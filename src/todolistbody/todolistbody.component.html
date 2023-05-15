@@ -8,14 +8,33 @@
   </label>
   <button (click)="clearCheckMessage();addItem()">加入</button>
   <div *ngIf="checkMessage!==''" [ngClass]="'alertText'">{{checkMessage}}</div>
+
+
+
+
+  <fieldset>
+    <legend>顯示模式</legend>
+    <select id="displayMode" [(ngModel)]="displayMode" (change)="getItemsByState(displayMode)">
+      <!-- 先留著，因為我現在不知道要怎麼要去處理，每一種case，對應的情境function要怎麼變化 -->
+      <!-- <option *ngFor="let item of ['all','onlyCompelete','onlyProcessing']">{{item}}</option> -->
+      <!--感覺這裡可以加ngif，去多優化，如果selected的話可以做點什麼之類的-->
+      <option>All</option>
+      <option>Active</option>
+      <option>Completed</option>
+    </select>
+    displayMode : {{displayMode}}
+
+
+
+  </fieldset>
   <div>
-    <button (click)="clearItem()">清空所有待辦事項</button><button (click)="readDefaultTodoItem()">載入預設的待辦事項</button><br>
-    <button (click)="setItemState(true)">將所有的待辦事項設定為完成</button><button (click)="setItemState(false)">將所有的待辦事項設定為進行中</button><br>
+    <button (click)="clearItem()">清空</button><button (click)="readDefaultTodoItem()">載入預設的待辦事項</button><br>
+    <button (click)="setItemState(true)">全部完成</button><button (click)="setItemState(false)">全部進行中</button><br>
 
   </div>
   <table [border]="1">
     <tr style="background-color: lightgrey;"><td>完成</td><td>序號</td><td>待辦事項</td><td>刪除</td></tr>
-    <tr *ngFor="let item of todoitems">
+    <tr *ngFor="let item of getItemsByState(displayMode)">
       <td><input type="checkbox"
         [id]="item.id"
         [checked]="item.isCompelete"

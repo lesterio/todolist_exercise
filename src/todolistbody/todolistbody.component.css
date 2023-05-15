@@ -1,3 +1,7 @@
 .alertText{
   color: red;
 }
+
+.compelteMark{
+text-decoration : line-through;
+}
