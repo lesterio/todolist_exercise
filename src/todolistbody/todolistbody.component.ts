@@ -11,7 +11,7 @@ import { TodoService } from 'src/app/todo.service';
   imports: [CommonModule,FormsModule],
   templateUrl: './todolistbody.component.html',
   styleUrls: ['./todolistbody.component.css'],
-  inputs : [  ],
+  inputs : [],
   providers : []
 })
 export class TodolistbodyComponent{

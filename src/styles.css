@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+button{
+  color: white;
+  background-color: brown;
+  margin-left: 2px;
+}
+input{
+  color: red;
+}
+
+select > option{
+  font-family: 'Courier New', Courier, monospace;
+}
+
+table > tr.title{
+  background-color: lightgrey;
+}

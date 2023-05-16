@@ -16,9 +16,13 @@ export class TodoService {
     })
   };
   addItem = (desc : string) =>{
-    if( desc !== ''){
-      this.index += 1
-      this.todoItems.push({ id : this.index , itemDesc : desc , isCompelete : false})}
+    if( desc !== '') this.todoItems.push({ id : this.index++ , itemDesc : desc , isCompelete : false})
+  }
+
+  //在想說這樣應該可以？
+  updateItem = ( data : Todoitem) => {
+    let findIndex = this.todoItems.findIndex(item=>item.id=== data.id)
+    if(findIndex > -1) this.todoItems[findIndex] = data
   }
   updateItemState(id :number , state : boolean){
     let findIndex = this.todoItems.findIndex(item=>item.id===id)
@@ -29,27 +33,14 @@ export class TodoService {
     if(findIndex !== null) this.todoItems[findIndex].itemDesc = description
   }
 
-  removeItem(data : Todoitem){
-    return this.todoItems = this.todoItems.filter( item => item !== data)
-  }
+  removeItem = (data : Todoitem) => this.todoItems = this.todoItems.filter( item => item !== data)
   getItemByStateCount = (compelete : boolean) => this.todoItems.filter( item => item.isCompelete===compelete).length;
   getCompleteItemCount = () => { return this.todoItems.filter( item => item.isCompelete===true).length; }
   getProcessingItemCount = () => { return this.todoItems.filter( item => item.isCompelete===false).length; }
   getItems = () => this.todoItems;
-  getCompleteItems() {
-    let current : Todoitem[] = [];
-    current = this.todoItems.filter(t => t.isCompelete=== true);
-    return current;
-  }
-  getProcessingItems() {
-    let current : Todoitem[] = [];
-    current = this.todoItems.filter(t => t.isCompelete=== false);
-    return current;
-  }
-  setItemsState(state:boolean){
-    this.todoItems.forEach(item=>item.isCompelete = state)
-  }
-
+  getCompleteItems = () => this.todoItems.filter(t => t.isCompelete=== true);
+  getProcessingItems = () => this.todoItems.filter(t => t.isCompelete=== false);
+  setItemsState = (state:boolean) => this.todoItems.forEach(item=>item.isCompelete = state)
   getItemsByState(state : string){
     let current :Todoitem[] = [];
      switch(state){

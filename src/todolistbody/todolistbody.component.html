@@ -3,34 +3,28 @@
     <span>
       <input id="txtTodoitem" type='text' placeholder="請輸入待辦事項"
       (keydown.enter)="clearCheckMessage();addItem()"
-      [(ngModel)]="inputDesc">
+      [(ngModel)]="inputDesc" required>
     </span>
   </label>
   <button (click)="clearCheckMessage();addItem()">加入</button>
   <div *ngIf="checkMessage!==''" [ngClass]="'alertText'">{{checkMessage}}</div>
 
-  <fieldset>
-    <legend>顯示模式</legend>
-    <select id="displayMode" [(ngModel)]="displayMode" (change)="getItemsByState(displayMode)">
-      <!-- 先留著，因為我現在不知道要怎麼要去處理，每一種case，對應的情境function要怎麼變化 -->
-      <!-- <option *ngFor="let item of ['all','onlyCompelete','onlyProcessing']">{{item}}</option> -->
-      <!--感覺這裡可以加ngif，去多優化，如果selected的話可以做點什麼之類的-->
-      <option>All</option>
-      <option>Active</option>
-      <option>Completed</option>
-    </select>
-    displayMode : {{displayMode}}
 
-
-
-  </fieldset>
+  <div>顯示模式 : <select id="displayMode" [(ngModel)]="displayMode" (change)="getItemsByState(displayMode)">
+    <!-- 先留著，因為我現在不知道要怎麼要去處理，每一種case，對應的情境function要怎麼變化 -->
+    <!-- <option *ngFor="let item of ['all','onlyCompelete','onlyProcessing']">{{item}}</option> -->
+    <!--感覺這裡可以加ngif，去多優化，如果selected的話可以做點什麼之類的-->
+    <option value="All">顯示全部</option>
+    <option value="Active">進行中</option>
+    <option value="Completed">完成</option>
+  </select></div>
   <div>
-    <button (click)="clearItem()">清空</button><button (click)="readDefaultTodoItem()">載入預設的待辦事項</button><br>
-    <button (click)="setItemsState(true)">全部完成</button><button (click)="setItemsState(false)">全部進行中</button><br>
+    <button (click)="clearItem()">清空</button><button (click)="readDefaultTodoItem()">載入預設的待辦事項</button>
+    <button (click)="setItemsState(true)">全部完成</button><button (click)="setItemsState(false)">全部進行中</button>
 
   </div>
   <table [border]="1">
-    <tr style="background-color: lightgrey;"><td>完成</td><td>序號</td><td>待辦事項</td><td>刪除</td></tr>
+    <tr class="title"><td>完成</td><td>序號</td><td>待辦事項</td><td>刪除</td></tr>
     <tr *ngFor="let item of getItemsByState(displayMode)">
       <td><input type="checkbox"
         [id]="item.id"
@@ -38,7 +32,7 @@
         (change)="updateItemState(item.id,!item.isCompelete)"><!--id是要給label for用的--></td>
       <td>{{item.id}}</td>
       <td><label [htmlFor]="item.id">{{item.itemDesc}} </label> </td>
-      <td><button (click)="removeItem(item)">移除</button></td>
+      <td><button class="button" (click)="removeItem(item)">移除</button></td>
     </tr>
   </table>
   已完成：{{getCompeleteItemCount()}}
