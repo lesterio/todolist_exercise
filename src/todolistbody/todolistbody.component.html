@@ -9,9 +9,6 @@
   <button (click)="clearCheckMessage();addItem()">加入</button>
   <div *ngIf="checkMessage!==''" [ngClass]="'alertText'">{{checkMessage}}</div>
 
-
-
-
   <fieldset>
     <legend>顯示模式</legend>
     <select id="displayMode" [(ngModel)]="displayMode" (change)="getItemsByState(displayMode)">
@@ -29,7 +26,7 @@
   </fieldset>
   <div>
     <button (click)="clearItem()">清空</button><button (click)="readDefaultTodoItem()">載入預設的待辦事項</button><br>
-    <button (click)="setItemState(true)">全部完成</button><button (click)="setItemState(false)">全部進行中</button><br>
+    <button (click)="setItemsState(true)">全部完成</button><button (click)="setItemsState(false)">全部進行中</button><br>
 
   </div>
   <table [border]="1">
