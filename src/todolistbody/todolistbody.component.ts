@@ -19,9 +19,8 @@ export class TodolistbodyComponent{
   checkMessage = ''
   inputDesc = ''
   displayMode : string = 'All'
-  //todoItems : Todoitem[] = [];
-
   request = inject(HttpClient);//定義一個請求
+
   clearItem = () => this.service.clearItems()
   readDefaultTodoItem(){
     this.request.get<Todoitem[]>('http://localhost:4200/assets/data/todoitems.json').subscribe(
@@ -30,11 +29,10 @@ export class TodolistbodyComponent{
     })
   }
   clearCheckMessage = () => this.checkMessage = ''
-  addItem(){
-    if(this.inputDesc!=='')
-      this.service.addItem(this.inputDesc)
-    else
-      this.checkMessage = '待辦事項不得為空'
+  validator = () => this.inputDesc !== '' ? '' : '待辦事項不得為空'
+  addItem = () => {
+    this.checkMessage = this.validator();
+    if(this.checkMessage === '')this.service.addItem(this.inputDesc);
     this.inputDesc = ''
   }
   removeItem = (data : Todoitem) => this.service.removeItem(data)
