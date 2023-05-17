@@ -37,6 +37,7 @@ export class TodolistbodyComponent{
   }
   removeItem = (data : Todoitem) => this.service.removeItem(data)
   updateItemState = (id :number , state : boolean) => this.service.updateItemState(id,state)
+  updateItemEdit = ( id : number , state : boolean) => this.service.updateItemEdit(id,state)
   updateItemDescription = (id : number , description : string) => this.service.updateItemDescription(id,description)
   setItemsState = (state:boolean) => this.service.setItemsState(state)
   getCompeleteItemCount = () => this.service.getCompleteItemCount();
@@ -44,6 +45,7 @@ export class TodolistbodyComponent{
   getItems = () => this.service.getItems();
   getCompleteItems =() => this.service.getCompleteItems();
   getProcessingItems = () => this.service.getProcessingItems();
+
   //先留著這種想法，但在這次好像不太適合。
   //好像也可以用enum?
    getItemsByState = (state : string ) => this.service.getItemsByState(state);

@@ -1,7 +1,7 @@
 [
-    {"id":1, "itemDesc" : "睡覺" , "isCompelete" : false},
-    {"id":2, "itemDesc" : "吃早餐" , "isCompelete" : true},
-    {"id":3, "itemDesc" : "吃午餐" , "isCompelete" : false},
-    {"id":4, "itemDesc" : "吃晚餐" , "isCompelete" : false},
-    {"id":5, "itemDesc" : "吃宵夜" , "isCompelete" : false}
+    {"id":1, "Description" : "睡覺" , "Compelete" : false},
+    {"id":2, "Description" : "吃早餐" , "Compelete" : true},
+    {"id":3, "Description" : "吃午餐" , "Compelete" : false},
+    {"id":4, "Description" : "吃晚餐" , "Compelete" : false},
+    {"id":5, "Description" : "吃宵夜" , "Compelete" : false}
 ]

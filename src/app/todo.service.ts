@@ -16,7 +16,7 @@ export class TodoService {
     })
   };
   addItem = (desc : string) =>{
-    if( desc !== '') this.todoItems.push({ id : this.index++ , itemDesc : desc , isCompelete : false})
+    if( desc !== '') this.todoItems.push({ id : this.index++ , Description : desc , Compelete : false , Edit : false})
   }
 
   //在想說這樣應該可以？
@@ -26,21 +26,25 @@ export class TodoService {
   }
   updateItemState(id :number , state : boolean){
     let findIndex = this.todoItems.findIndex(item=>item.id===id)
-    if(findIndex > -1) this.todoItems[findIndex].isCompelete = state
+    if(findIndex > -1) this.todoItems[findIndex].Compelete = state
+  }
+  updateItemEdit(id :number , state : boolean){
+    let findIndex = this.todoItems.findIndex(item=>item.id===id)
+    if(findIndex > -1) this.todoItems[findIndex].Edit = state
   }
   updateItemDescription(id : number , description : string){
     let findIndex = this.todoItems.findIndex(item => { item.id === id  })
-    if(findIndex !== null) this.todoItems[findIndex].itemDesc = description
+    if(findIndex !== null) this.todoItems[findIndex].Description = description
   }
 
   removeItem = (data : Todoitem) => this.todoItems = this.todoItems.filter( item => item !== data)
-  getItemByStateCount = (compelete : boolean) => this.todoItems.filter( item => item.isCompelete===compelete).length;
-  getCompleteItemCount = () => { return this.todoItems.filter( item => item.isCompelete===true).length; }
-  getProcessingItemCount = () => { return this.todoItems.filter( item => item.isCompelete===false).length; }
+  getItemByStateCount = (compelete : boolean) => this.todoItems.filter( item => item.Compelete===compelete).length;
+  getCompleteItemCount = () => { return this.todoItems.filter( item => item.Compelete===true).length; }
+  getProcessingItemCount = () => { return this.todoItems.filter( item => item.Compelete===false).length; }
   getItems = () => this.todoItems;
-  getCompleteItems = () => this.todoItems.filter(t => t.isCompelete=== true);
-  getProcessingItems = () => this.todoItems.filter(t => t.isCompelete=== false);
-  setItemsState = (state:boolean) => this.todoItems.forEach(item=>item.isCompelete = state)
+  getCompleteItems = () => this.todoItems.filter(t => t.Compelete=== true);
+  getProcessingItems = () => this.todoItems.filter(t => t.Compelete=== false);
+  setItemsState = (state:boolean) => this.todoItems.forEach(item=>item.Compelete = state)
   getItemsByState(state : string){
     let current :Todoitem[] = [];
      switch(state){
@@ -48,10 +52,10 @@ export class TodoService {
         current = this.todoItems;
         break;
        case 'Active':
-        current = this.todoItems.filter(t => t.isCompelete=== false);
+        current = this.todoItems.filter(t => t.Compelete=== false);
         break;
        case 'Completed':
-        current = this.todoItems.filter(t => t.isCompelete===true);
+        current = this.todoItems.filter(t => t.Compelete===true);
         break;
        default:
         current = this.todoItems

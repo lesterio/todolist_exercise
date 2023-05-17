@@ -15,3 +15,11 @@ select > option{
 table > tr.title{
   background-color: lightgrey;
 }
+
+.onEdit {
+  color: red;
+}
+.onReadonly{
+  color: black;
+
+}

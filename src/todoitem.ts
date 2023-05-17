@@ -1,5 +1,6 @@
 export interface Todoitem {
   id : number ,
-  itemDesc : string,
-  isCompelete : boolean,
+  Description : string,
+  Compelete : boolean,
+  Edit : boolean,
 }
