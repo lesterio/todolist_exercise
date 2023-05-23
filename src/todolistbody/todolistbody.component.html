@@ -8,8 +8,6 @@
   </label>
   <button (click)="clearCheckMessage();addItem()">加入</button>
   <div *ngIf="checkMessage!==''" [ngClass]="'alertText'">{{checkMessage}}</div>
-
-
   <div>顯示模式 : <select id="displayMode" [(ngModel)]="displayMode" (change)="getItemsByState(displayMode)">
     <!-- 先留著，因為我現在不知道要怎麼要去處理，每一種case，對應的情境function要怎麼變化 -->
     <!-- <option *ngFor="let item of ['all','onlyCompelete','onlyProcessing']">{{item}}</option> -->
@@ -19,28 +17,30 @@
     <option value="Completed">完成</option>
   </select></div>
   <div>
-    <button (click)="clearItem()">清空</button><button (click)="readDefaultTodoItem()">載入預設的待辦事項</button>
+    <button (click)="clearItem()">清空</button>
+    <button (click)="getDefaultItem()">載入預設的待辦事項</button>
     <button (click)="setItemsState(true)">全部完成</button><button (click)="setItemsState(false)">全部進行中</button>
-
   </div>
   <table [border]="1">
     <tr class="title"><td>完成</td><td>序號</td><td>待辦事項</td><td>刪除</td></tr>
     <tr *ngFor="let item of getItemsByState(displayMode)">
       <td><input type="checkbox"
         [id]="item.id"
-        [checked]="item.Compelete"
-        (change)="updateItemState(item.id,!item.Compelete)"><!--id是要給label for用的--></td>
+        [checked]="item.completed"
+        (change)="updateItemState(item.id,!item.completed)"><!--id是要給label for用的--></td>
       <td>{{item.id}}</td>
       <td><label [htmlFor]="item.id">
         <input type="text"
-        [value]="item.Description"
+        [value]="item.title"
         [readOnly]="!item.Edit"
-        (change)="updateItemDescription(item.id,item.Description)"
-        (dblclick)="updateItemEdit(item.id,true)"
-        (focusout)="updateItemEdit(item.id,false)"
-        [className]="item.Edit ? 'onEdit' :'onReadonly'"></label>
+        (change)="updateItemDescription(item.id,item.title);"
+        (dblclick)="onEditAction(true);putItem(item.id,item.title,item.completed);"
+        (focusout)="onEditAction(false);"
+        [class.onEdit] = "onEdit" [class.onReadonly] = "!onEdit"
+        ></label>
+        {{item.id}}---{{item.title}}
       </td>
-      <td><button class="button" (click)="removeItem(item)">移除</button></td>
+      <td><button class="button" (click)="removeItem(item);deleteItem(item.id);">移除</button></td>
     </tr>
   </table>
   已完成：{{getCompeleteItemCount()}}

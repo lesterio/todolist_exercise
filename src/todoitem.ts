@@ -1,6 +1,7 @@
 export interface Todoitem {
+  userId : number ,
   id : number ,
-  Description : string,
-  Compelete : boolean,
+  title : string,
+  completed : boolean,
   Edit : boolean,
 }
